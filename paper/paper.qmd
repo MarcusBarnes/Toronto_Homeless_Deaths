@@ -1,10 +1,9 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Toronto’s Homelessness Crisis"
+subtitle: "An analysis of Deaths by Month"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+  - Marcus Emmanuel Barnes
+thanks: "Code and data are available at: [https://github.com/MarcusBarnes/Toronto_Homeless_Deaths](https://github.com/MarcusBarnes/Toronto_Homeless_Deaths)."
 date: today
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
