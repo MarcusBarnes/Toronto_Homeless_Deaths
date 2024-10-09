@@ -6,10 +6,11 @@ author:
 thanks: "Code and data are available at: [https://github.com/MarcusBarnes/Toronto_Homeless_Deaths](https://github.com/MarcusBarnes/Toronto_Homeless_Deaths)."
 date: today
 date-format: long
-abstract: "There is a general sense that the Toronto Homeless situation is getting worse.  Given the lack of cause of death information to help better pinpoint interventions to reduce premature death of Homeless Torontonians, we carry out a preliminary exploration of a dataset we do have: the 'Deaths of People Experiencing Homelessness' dataset published by Toronto Public Health available via Open Data Toronto. [More to come!]. We close with a discussion of the limitations of our preliminary analysis and some next steps."
+abstract: "There is a general sense that the Toronto Homeless situation is getting worse.  Given the lack of cause of death information to help better pinpoint interventions to reduce premature death of Homeless Torontonians, we carry out a preliminary exploration of a dataset we do have: the 'Deaths of People Experiencing Homelessness' dataset published by Toronto Public Health available via Open Data Toronto. The data shows that COVID-19 lockdowns increased homeless deaths during that period. Using the data, we create a forecast of 2024 homeless deaths using the Prophet procedure.  We close with a discussion of the limitations of our preliminary analysis and forecase and outline next steps."
 format: pdf
 number-sections: true
 bibliography: references.bib
+
 ---
 
 ```{r}
@@ -19,6 +20,10 @@ bibliography: references.bib
 
 library(tidyverse)
 library(here)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(prophet)
 
 # Read in the data.
 data <- read_csv(here("data/01-raw_data/raw_homeless_deaths_by_month_data.csv"))
@@ -39,6 +44,7 @@ For the purposes of this dataset, Toronto Public Health (TPH), defines homelessn
 # Analysis
 
 ## Summary Statistics
+In the exsiting data, the monthly death counts range from 1 to 26.  The median monthly death count is 11 and the mean death count is approximately 12.7.  The standard deviation is 5.06.
 ```{r}
 #| message: false
 #| echo: false
@@ -46,39 +52,175 @@ For the purposes of this dataset, Toronto Public Health (TPH), defines homelessn
 #| fig-cap: Summary statistics
 
 summary(data$Count)
+mean(data$Count, na.rm = TRUE)
+median(data$Count, na.rm = TRUE)
+sd(data$Count, na.rm = TRUE)
+```
+## Distribution of Monthly Death Counts
+```{r}
+#| message: false
+#| echo: false
+#| label: distribution-of-monthly-deaths
+#| fig-cap: Distribution of Monthly Deaths
+
+# Convert Month.of.death to a date format
+data$Date <- as.Date(paste(data$Year.of.death, match(data$Month.of.death, month.name), "01", sep = "-"))
+
+# Histogram of 'Count'
+ggplot(data, aes(x = Count)) +
+  geom_histogram(binwidth = 2, fill = "blue", color = "black") +
+  labs(title = "Distribution of Monthly Death Counts", x = "Count", y = "Frequency")
 ```
 
-## Model set-up
+##  
+```{r}
+#| message: false
+#| echo: false
+#| label: death-count-over-time
+#| fig-cap: Death Count over Time.
 
+# Convert Month.of.death to a date format
+data$Date <- as.Date(paste(data$Year.of.death, match(data$Month.of.death, month.name), "01", sep = "-"))
 
+# Time series plot
+ggplot(data, aes(x = Date, y = Count)) +
+  geom_line() +
+  labs(title = "Death Count Over Time", x = "Date", y = "Count")
+```
 
+## Forecast Model set-up
+Using the Prophet package[@citeProphetPackage], we can attempt to forecast what will happen over the next 12 months.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: prophet-forecast
+#| fig-cap: Forecast of the next 12 months using Prophet forecast procedure.
+
+# Convert Year and Month into a datetime format
+# ToDo - you're repeating this.  Process the data before including in
+# the main paper Quarto file.
+data$Date <- ymd(paste(data$Year.of.death, data$Month.of.death, "01"))
+
+# Arrange the data by Date
+data <- data %>% arrange(Date)
+
+# Prepare the data for Prophet
+prophet_data <- data %>%
+  select(Date, Count) %>%
+  rename(ds = Date, y = Count)
+
+# Fit the Prophet model
+model <- prophet(prophet_data)
+
+# Make a future dataframe for the next 12 months
+future <- make_future_dataframe(model, periods = 12, freq = "month")
+
+# Forecast the future values
+forecast <- predict(model, future)
+
+# Plot the forecast
+plot(model, forecast)
+
+# Extract the relevant columns for the next 12 months
+forecast_table <- forecast %>%
+  select(ds, yhat) %>%
+  filter(ds > max(prophet_data$ds))
+
+# Print the forecast table
+#print(forecast_table)
+```
+In particular, we have the following monthly forecast for 2024 (where we have rounded the predicted number up to a whole number):
+```{=latex}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Month} & \textbf{Forecasted Deaths} \\
+\hline
+January & 21 \\
+February & 16 \\
+March & 14 \\
+April & 15 \\
+May & 22 \\
+June & 15 \\
+July & 19 \\
+August & 20 \\
+September & 15 \\
+October & 16 \\
+November & 20 \\
+December & 20 \\
+\hline
+\end{tabular}
+\caption{Forecasted death counts of homeless Torontonians for 2024 by month.}
+\label{table:forecast}
+\end{table}
+
+```
 ### Model justification
+According to The Prophet package CRAN page, the forecasting procedure is "Prophet is robust to missing data and shifts in the trend, and typically handles outliers well" [@citeProphetPackage].  
 
 
+# Forecasting Results
+Using the Prophet forecasting procedure have the following monthly forecast for 2024 (where we have rounded the predicted number up to a whole number):
+```{=latex}
 
-# Results
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Month} & \textbf{Forecasted Deaths} \\
+\hline
+January & 21 \\
+February & 16 \\
+March & 14 \\
+April & 15 \\
+May & 22 \\
+June & 15 \\
+July & 19 \\
+August & 20 \\
+September & 15 \\
+October & 16 \\
+November & 20 \\
+December & 20 \\
+\hline
+\end{tabular}
+\caption{Forecasted death counts of homeless Torontonians for 2024 by month.}
+\label{table:forecast}
+\end{table}
 
-
-
-
-
+```
 # Discussion
 
-## First discussion point {#sec-first-point}
+## Impact of COVID-19 lockdowns.
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+From the plot of Count over Time (@death-count-over-time), there is a clear increase in homeless dealths during that period. This can be attributed to reduces services for and increased social isolation of homeless Torontonians during this period. [Cite literature on this.]
 
-## Second discussion point
-
-## Third discussion point
+## Forecasts for Toronto Funeral Expense Budget Allocation {#sec-first-point}
+Our forecast of monthly deaths for 2024 does not help us in designing direct interventions to avoid these deaths, but it can assist the city of Toronto allocate appropriate funds for the funeral expenses of the deceased [@citeCityofToronto_HealtSupport].
 
 ## Weaknesses
 
-Weaknesses and next steps should also be included.
+### Lack of Data
+This data set only goes back to 2017.  As additional data is collected each year, certainty on discernable trends will increase.
+
+### Forecast Models
+Other time series forecasting models such as ARIMA or Holt-Winters available in the forecast package could be considered [@citeForecastPackage].  Each has its pros and cons. Prophet was primarily selected for its ease of use.
 
 ## Next Steps
-As the dataset under investigation is an example of time series data, are there motifs in the dataset which may provide us more insights? There is a powerful Python library created for exploring motifs in time series data called STUMPY [@citeLaw2019stumpy].  By using the `reticulate` package [@citeReticulatePackage], it's possible to use STUMPY within R as demonstrated in a relevant tutorial [@citeStumpr].
 
+## Enriching and Complementing the Data
+A next step is to look at how we can enrich the relatively basic dataset under study with additional data.  This enrichment may provide more insight into the collected rates of deaths amongs homeless Torontonians and may provide information which can help form improved interventions.
+
+### Utilizing Time Series Data
+Based on the time series forecast presented in this report, follow up next year to determine the accuracy of the forecasted trend.  Were other forecasting techniques such as ARIMA or Holt-Winters ultimately more correct?  What can we now say with an additional year of collected data?
+
+The concept of motifs in time series data may provide additional insight into less evident patterns in the data.  There is a powerful Python library created for exploring motifs in time series data called STUMPY [@citeLaw2019stumpy].  By using the `reticulate` package [@citeReticulatePackage], it's possible to use STUMPY within R as demonstrated in a relevant tutorial [@citeStumpr].
+
+<!--
+# Saving for future iterations of enhacements.
 \newpage
 
 \appendix
@@ -94,7 +236,7 @@ As the dataset under investigation is an example of time series data, are there 
 
 
 ## Diagnostics
-
+-->
 
 
 

@@ -1,37 +1,49 @@
 #### Preamble ####
-# Purpose: Models... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Basic Exploratory Data Analysis.
+# Author: Marcus Barnes
+# Date: October 9, 2024
+# Contact: marcus.barnes@utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: TBD
+# Any other information needed? TDB
 
 
 #### Workspace setup ####
 library(tidyverse)
 library(rstanarm)
+library(here)
+library(ggplot2)
 
 #### Read data ####
-analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
+data <- read.csv("data/01-raw_data/raw_homeless_deaths_by_month_data.csv")
 
-### Model data ####
-first_model <-
-  stan_glm(
-    formula = flying_time ~ length + width,
-    data = analysis_data,
-    family = gaussian(),
-    prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_intercept = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_aux = exponential(rate = 1, autoscale = TRUE),
-    seed = 853
-  )
+# Descirptive Statistics, in particular, we are interested in Count.
+summary(data)
+summary(data$Count)
+
+# Mean, median, and standard deviation
+mean(data$Count, na.rm = TRUE)
+median(data$Count, na.rm = TRUE)
+sd(data$Count, na.rm = TRUE)
+
+# Convert Month.of.death to a date format
+data$Date <- as.Date(paste(data$Year.of.death, match(data$Month.of.death, month.name), "01", sep = "-"))
+
+# Time series plot
+ggplot(data, aes(x = Date, y = Count)) +
+  geom_line() +
+  labs(title = "Count Over Time", x = "Date", y = "Count")
+
+# Histogram of 'Count'
+ggplot(data, aes(x = Count)) +
+  geom_histogram(binwidth = 2, fill = "blue", color = "black") +
+  labs(title = "Distribution of Count", x = "Count", y = "Frequency")
 
 
-#### Save model ####
-saveRDS(
-  first_model,
-  file = "models/first_model.rds"
-)
+# Time series plot of count over time.
+ggplot(data, aes(x = Date, y = Count)) +
+  geom_line() +
+  labs(title = "Count Over Time", x = "Date", y = "Count")
+
 
 
