@@ -20,7 +20,7 @@ The repo is structured as:
 
 Aspects of the original [starter_folder](https://github.com/RohanAlexander/starter_folder) code were written with the help of the auto-complete tool, Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
 
-For this Toronto Homeless Crisis repository, some of the R code utilized was based off suggestions from Microsoft Copilot.
+For this Toronto Homeless Deaths repository, some of the R code utilized was based off suggestions from Microsoft Copilot.
 
 ## To Do
 
