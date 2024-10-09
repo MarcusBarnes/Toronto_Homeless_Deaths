@@ -200,7 +200,7 @@ December & 20 \\
 
 ## Impact of COVID-19 lockdowns.
 
-From the plot of Count over Time (@fig-death-count-over-time), there is a clear increase in homeless dealths during that period. This can be attributed to reduces services for and increased social isolation of homeless Torontonians during this period. <!-- cite relevant sources to substantiate. -->
+From the plot of Count over Time (@fig-death-count-over-time), there is a clear increase in homeless deaths during that period. This can be attributed to reduced services for, and the increased social isolation of, homeless Torontonians during this period. Forchuk et al. carried out an qualitative study to determine themes which may have caused an increase in homelessness during the pandemic [@citeForchuk2023community] and K. May and J. Shelly provide a scan of COVID-19 policies in Ontario [@citeMay2023scan] which disproportionately impacted the homeless Torontonians.  Their research may explain the apparent increase in homeless deaths during the pandemic period. 
 
 ## Forecasts for Toronto Funeral Expense Budget Allocation {#sec-first-point}
 Our forecast of monthly deaths for 2024 does not help us in designing direct interventions to avoid these deaths, but it can assist the city of Toronto allocate appropriate funds for the funeral expenses of the deceased [@citeCityofToronto_HealtSupport].
