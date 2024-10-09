@@ -69,9 +69,12 @@ If my paper were 10 pages, then should be be at least 2.5 pages. The discussion 
 
 ## Third discussion point
 
-## Weaknesses and next steps
+## Weaknesses
 
 Weaknesses and next steps should also be included.
+
+## Next Steps
+As the dataset under investigation is an example of time series data, are there motifs in the dataset which may provide us more insights? There is a powerful Python library created for exploring motifs in time series data called STUMPY [@citeLaw2019stumpy].  By using the `reticulate` package [@citeReticulatePackage], it's possible to use STUMPY within R as demonstrated in a relevant tutorial [@citeStumpr].
 
 \newpage
 
