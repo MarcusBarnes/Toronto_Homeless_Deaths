@@ -1,4 +1,4 @@
-# Toronto’s Homelessness Crisis: A Prelimary Analysis of Deaths by Month
+# Toronto’s Homelessness Crisis: A Preliminary Analysis of Deaths by Month
 
 ## Overview
 
@@ -22,10 +22,12 @@ Aspects of the original [starter_folder](https://github.com/RohanAlexander/start
 
 For this Toronto Homeless Crisis repository, some of the R code utilized was based off suggestions from Mircosoft Copilot.
 
-## Some checks
+## To Do
 
 - [ ] Change the rproj file name so that it's not starter_folder.Rproj
-- [ ] Change the README title so that it's not Starter folder
+- [x] Change the README title so that it's not Starter folder
+- [ ] Update the README so that it's meaningful to those who visit this repository
 - [ ] Remove files that you're not using
 - [ ] Update comments in R scripts
+
 - [ ] Remove this checklist

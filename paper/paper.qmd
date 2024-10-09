@@ -1,6 +1,6 @@
 ---
 title: "Toronto’s Homelessness Crisis"
-subtitle: "A Prelimary Analysis of Deaths by Month"
+subtitle: "A Preliminary Analysis of Deaths by Month"
 author: 
   - Marcus Emmanuel Barnes
 thanks: "Code and data are available at: [https://github.com/MarcusBarnes/Toronto_Homeless_Deaths](https://github.com/MarcusBarnes/Toronto_Homeless_Deaths)."
