@@ -4,6 +4,8 @@
 
 This is an repo based off Rohan Alexander's [starter_folder](https://github.com/RohanAlexander/starter_folder) repository and is meant to record my exploration of the homeless deaths by month dataset available from Open Data Toronto as part of my study of *[Telling Stories with Data](https://tellingstorieswithdata.com/)*. 
 
+The main purpose of this repository is to learn how to use Quarto to create a [paper](https://github.com/MarcusBarnes/Toronto_Homeless_Deaths/blob/main/paper/paper.pdf).  
+
 ## File Structure
 
 The repo is structured as:
