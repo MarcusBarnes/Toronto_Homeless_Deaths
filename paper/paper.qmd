@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: [https://github.com/MarcusBarnes/Toronto_Homeless_Deaths](https://github.com/MarcusBarnes/Toronto_Homeless_Deaths)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "There is a general sense that the Toronto Homeless situation is getting worse.  Given the lack of cause of death information to help better pinpoint interventions to reduce premature death of Homeless Torontonians, we carry out a preliminary exploration of a dataset we do have: the 'Deaths of People Experiencing Homelessness' dataset published by Toronto Public Health available via Open Data Toronto. [More to come!]. We close with a discussion of the limitations of our preliminary analysis and some next steps."
 format: pdf
 number-sections: true
 bibliography: references.bib
