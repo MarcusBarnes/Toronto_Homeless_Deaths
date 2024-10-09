@@ -168,7 +168,7 @@ According to The Prophet package CRAN page, the forecasting procedure is "Prophe
 
 
 # Forecasting Results
-Using the Prophet forecasting procedure have the following monthly forecast for 2024 (where we have rounded the predicted number up to a whole number):
+The Prophet forecasting procedure provides us with the following monthly forecast for 2024 (where we have rounded the predicted number up to a whole number):
 ```{=latex}
 
 \begin{table}[h!]
