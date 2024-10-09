@@ -24,7 +24,7 @@ For this Toronto Homeless Crisis repository, some of the R code utilized was bas
 
 ## To Do
 
-- [ ] Change the rproj file name so that it's not starter_folder.Rproj
+- [x] Change the rproj file name so that it's not starter_folder.Rproj
 - [x] Change the README title so that it's not Starter folder
 - [ ] Update the README so that it's meaningful to those who visit this repository
 - [ ] Remove files that you're not using
