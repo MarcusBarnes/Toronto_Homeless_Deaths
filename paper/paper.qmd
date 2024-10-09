@@ -28,15 +28,25 @@ head(data)
 
 
 # Introduction
-There is a general sense that the homeless crisis in Toronto is getting worse [@citeCTVNewsToronto].  A recent study [@citeRichard2024disparities] indicates that, on average, homeless Torontonians are 17 years younger than those who have not experienced homelessness.   As the lead author Lucie Richard lements in an interview about the study, there is a lack of cause of death information to help better pinpoint interventions to reduce premature death [@citeCTVNewsToronto]. Given the lack of cause of death information, it is worthwhile exploring the data that does exist.  Toronto Public Health (TPL) has been collecting data on homeless deaths by month since January 2017.  We will explore this data set and determine what stories the data tells us. These stories may help inform leadership of governmental and non-govenmental agencies better utilize their scarce resource in the creation of more effective intervention initiatives reduce deaths among Toronto's homeless population.
+There is a general sense that the homeless crisis in Toronto is getting worse [@citeCTVNewsToronto]. A recent study [@citeRichard2024disparities] indicates that, on average, homeless Torontonians are 17 years younger than those who have not experienced homelessness. As the lead author Lucie Richard lements in an interview about the study, there is a lack of cause of death information to help better pinpoint interventions to reduce premature death [@citeCTVNewsToronto]. Given the lack of cause of death information, it is worthwhile exploring the data that does exist.  Toronto Public Health (TPL) has been collecting data on homeless deaths by month since January 2017. We explore this data set and determine what stories the data tells us. These stories may help inform leadership of governmental and non-governmental agencies better utilize their scarce resource in the creation of more effective intervention initiatives reduce deaths among Toronto's homeless population.
 
 # Data {#sec-data}
-In this report, we explore the 'Deaths of People Experiencing Homelessness' data set [@citeTorontoHomelessDeaths] which was collected using the Open Data Toronto Library [@citeOpenDataToronto] utilizing the statistiacal programming software R [@citeR].
+In this report, we explore the 'Deaths of People Experiencing Homelessness' data set [@citeTorontoHomelessDeaths] which was collected using the Open Data Toronto Library [@citeOpenDataToronto] utilizing the statistical programming software R [@citeR].
 
 ## Deaths of People Experiencing Homelessness Statistics
-For the purposes of this dataset, Toronto Public Health (TPH), defines homelessness as "the situation of an individual or family without stable, permanent, appropriate housing, or the immediate prospect, means and ability of acquiring it" [@citeTorontoHomelessDeaths]. Since January 2017, TPH has counted the number of deaths of people experiencing homelessness by year and month. The deaths are repoted to TPH by the Shelter, Support and Housing Administration (SSH), community partner organizations and the Coroner's Office [@citeTorontoHomelessDeaths].
+For the purposes of this dataset, Toronto Public Health (TPH), defines homelessness as "the situation of an individual or family without stable, permanent, appropriate housing, or the immediate prospect, means and ability of acquiring it" [@citeTorontoHomelessDeaths]. Since January 2017, TPH has counted the number of deaths of people experiencing homelessness by year and month. The deaths are reported to TPH by the Shelter, Support and Housing Administration (SSH), community partner organizations and the Coroner's Office [@citeTorontoHomelessDeaths].
 
 # Analysis
+
+## Summary Statistics
+```{r}
+#| message: false
+#| echo: false
+#| label: summary_statistics
+#| fig-cap: Summary statistics
+
+summary(data$Count)
+```
 
 ## Model set-up
 
@@ -47,14 +57,7 @@ For the purposes of this dataset, Toronto Public Health (TPH), defines homelessn
 
 
 # Results
-```{r}
-#| message: false
-#| echo: false
-#| label: summary_statistics
-#| fig-cap: Summary statistics
 
-summary(data$Count)
-```
 
 
 
