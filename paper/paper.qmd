@@ -44,23 +44,27 @@ For the purposes of this dataset, Toronto Public Health (TPH), defines homelessn
 # Analysis
 
 ## Summary Statistics
-In the exsiting data, the monthly death counts range from 1 to 26.  The median monthly death count is 11 and the mean death count is approximately 12.7.  The standard deviation is 5.06.
+In the existing data, the monthly death counts range from 1 to 26.  The median monthly death count is 11 and the mean death count is approximately 12.7.  The standard deviation is 5.06.
 ```{r}
 #| message: false
 #| echo: false
 #| label: summary_statistics
 #| fig-cap: Summary statistics
 
-summary(data$Count)
-mean(data$Count, na.rm = TRUE)
-median(data$Count, na.rm = TRUE)
-sd(data$Count, na.rm = TRUE)
+#summary(data$Count)
+#mean_count = mean(data$Count, na.rm = TRUE)
+#median_count = median(data$Count, na.rm = TRUE)
+#sd_count = sd(data$Count, na.rm = TRUE)
+
+
+
 ```
 ## Distribution of Monthly Death Counts
+In @fig-distribution-of-monthly-deaths, we see the distribution of monthly death counts.
 ```{r}
 #| message: false
 #| echo: false
-#| label: distribution-of-monthly-deaths
+#| label: fig-distribution-of-monthly-deaths
 #| fig-cap: Distribution of Monthly Deaths
 
 # Convert Month.of.death to a date format
@@ -76,7 +80,7 @@ ggplot(data, aes(x = Count)) +
 ```{r}
 #| message: false
 #| echo: false
-#| label: death-count-over-time
+#| label: fig-death-count-over-time
 #| fig-cap: Death Count over Time.
 
 # Convert Month.of.death to a date format
@@ -95,7 +99,7 @@ Using the Prophet package[@citeProphetPackage], we can attempt to forecast what 
 #| message: false
 #| warning: false
 #| echo: false
-#| label: prophet-forecast
+#| label: fig-prophet-forecast
 #| fig-cap: Forecast of the next 12 months using Prophet forecast procedure.
 
 # Convert Year and Month into a datetime format
@@ -196,7 +200,7 @@ December & 20 \\
 
 ## Impact of COVID-19 lockdowns.
 
-From the plot of Count over Time (@death-count-over-time), there is a clear increase in homeless dealths during that period. This can be attributed to reduces services for and increased social isolation of homeless Torontonians during this period. [Cite literature on this.]
+From the plot of Count over Time (@fig-death-count-over-time), there is a clear increase in homeless dealths during that period. This can be attributed to reduces services for and increased social isolation of homeless Torontonians during this period. <!-- cite relevant sources to substantiate. -->
 
 ## Forecasts for Toronto Funeral Expense Budget Allocation {#sec-first-point}
 Our forecast of monthly deaths for 2024 does not help us in designing direct interventions to avoid these deaths, but it can assist the city of Toronto allocate appropriate funds for the funeral expenses of the deceased [@citeCityofToronto_HealtSupport].
